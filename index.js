@@ -20,4 +20,3 @@ const displayMovies = async () => {
 }
 searchBtn.addEventListener("click", displayMovies)
 
-{/* <p>${oneMovie.Ratings[0].Value}</p> */}
