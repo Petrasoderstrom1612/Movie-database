@@ -1,3 +1,4 @@
+import { API_KEY } from "./config.js";
 const searchBtn = document.getElementById("search-btn")
 const moviesResult = document.getElementById("movies-result")
 
