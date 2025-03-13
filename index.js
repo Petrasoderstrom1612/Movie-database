@@ -30,10 +30,24 @@ const displayMovies = async () => {
             console.log(data.Title, data.imdbRating)
 
             searchedMoviesHTML += `
-            <div>
-            <p>${data.Title}</p>
-            <p>${data.imdbRating}</p>
-            <img src=${data.Poster} alt=${data.Title}/>
+            <div class="flex">
+                <div class="movie-img-div">
+                    <img class="movie-img" src="${data.Poster}" alt="Poster image for movie ${data.Title}"/>
+                </div>
+                <div class="movie-text-div">
+                    <div class="flex">
+                        <p>${data.Title}</p>
+                        <p><span>⭐</span>${data.imdbRating}</p>
+                    </div>
+                    <div class="flex flex-center">
+                        <p>${data.Runtime}</p>
+                        <p class="genre">${data.Genre}</p>
+                        <button><span>➕</span> Watchlist</button>
+                    </div>
+                    <div>
+                        <p>${data.Plot}</p>
+                    </div>
+                </div>
             </div>
             `
         console.log(searchedMoviesHTML)    

@@ -47,6 +47,7 @@
 /* SEARCH BAR */
 
 main{
+    padding: 4em;
     position: relative;
     display: flex;
     justify-content: center;
@@ -64,4 +65,30 @@ main{
 /* MOVIES */
 .movies-section{
     margin-top: 2em;
+}
+
+.flex{
+    display: flex;    
+}
+
+.flex-center{
+    align-items: center;
+    justify-content: space-around;
+}
+
+.movie-img-div{
+    min-width: 30vw;
+}
+
+.movie-img{
+    max-width: 25vw;
+    height: auto;
+}
+
+.movie-text-div{
+    margin-left: 2em;;
+}
+
+.genre{
+    text-align: center;
 }
