@@ -31,6 +31,7 @@ const displayMovies = async () => {
             searchedMoviesHTML += `
             <p>${data.Title}</p>
             <p>${data.imdbRating}</p>
+            <img src=${data.Poster} alt=${data.Title}/>
             `
         
     }
