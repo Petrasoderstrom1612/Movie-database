@@ -7,18 +7,20 @@
     <title>Movies database</title>
 </head>
 <body>
-    <header>
-        <h1>Find your film</h1>
-        <a href="./watchlist.html"  tabindex="0" aria-label="Home" title="Watchlist">Watchlist</a>
+    <header class="banner">
+        <h1 class="banner-title">Find your film</h1>
+        <a class="linkwatchlist" href="./watchlist.html"  tabindex="0" aria-label="Home" title="Watchlist">Watchlist</a>
     </header>
     <main>
-        <div>
+        <div class="search-bar">
             <input type="text"/>
             <button id="search-btn">Search</button>
         </div>
-        <section class="movies-section">
-            <div id="movies-result"></div>
-        </section>
+        <div>
+            <section class="movies-section">
+                <div id="movies-result"></div>
+            </section>
+        </div>
     </main>
     <script src="index.js" type="module"></script>
 </body>

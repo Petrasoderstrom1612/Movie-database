@@ -28,11 +28,15 @@ const displayMovies = async () => {
         const data = await res.json();
             console.log("the individual movie", data)
             console.log(data.Title, data.imdbRating)
+
             searchedMoviesHTML += `
+            <div>
             <p>${data.Title}</p>
             <p>${data.imdbRating}</p>
             <img src=${data.Poster} alt=${data.Title}/>
+            </div>
             `
+        console.log(searchedMoviesHTML)    
         
     }
     moviesResult.innerHTML = searchedMoviesHTML
