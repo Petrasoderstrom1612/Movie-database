@@ -240,3 +240,9 @@ h3{
     margin: 8px 0;
     width: 100%;
 }
+
+@media (max-width: 480px) {
+    .movie-text-div {
+        margin-left: 0;
+    }
+}
