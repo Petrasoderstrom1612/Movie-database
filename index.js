@@ -10,6 +10,7 @@ const moviesResult = document.getElementById("movies-result")
 let searchedWord = "love"
 let searchedMoviesArrShort = []
 let searchedMoviesArrAllData = []
+export let watchlistMovies = []
 
 
 const displayMovies = async () => {
@@ -48,7 +49,7 @@ const displayMovies = async () => {
                 <div class="flex movie-details">
                     <p>${oneSearchedMovie.Runtime}</p>
                     <p>${oneSearchedMovie.Genre}</p>
-                    <button class="watchlist-btn"><span class="plus-icon">+</span>Watchlist</button>
+                    <button class="watchlist-btn" data-watchlist-addition="${oneSearchedMovie.imdbID}"><span class="plus-icon" data-watchlist-addition="${oneSearchedMovie.imdbID}">+</span>Watchlist</button>
                 </div>
                 <div>
                     <p class="movie-plot">${oneSearchedMovie.Plot}</p>
@@ -58,12 +59,20 @@ const displayMovies = async () => {
         `
     }) 
   
-    moviesResult.innerHTML = searchedMoviesHTML.join("")
-        
+    moviesResult.innerHTML = searchedMoviesHTML.join("")       
+}
+searchBtn.addEventListener("click", displayMovies)
 
+document.addEventListener("click",(e) => { // LISTENERS ON ICON CLICKS VIA DATASET
+    for (let wishedMoviefromArrAllData of searchedMoviesArrAllData){
+        if(e.target.dataset.watchlistAddition === wishedMoviefromArrAllData.imdbID){
+            console.log(wishedMoviefromArrAllData.imdbID)
+            watchlistMovies.push(wishedMoviefromArrAllData)
+            console.log(watchlistMovies)
+        }
     }
-        searchBtn.addEventListener("click", displayMovies)
-        
+})        
+
 
 
 
