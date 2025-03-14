@@ -36,14 +36,14 @@ const displayMovies = async () => {
     //create html with the new array with movies that include all data
     const searchedMoviesHTML = searchedMoviesArrAllData.map((oneSearchedMovie) =>{
         return `
-                <div class="flex">
+        <div class="flex one-searched-movie">
             <div class="movie-img-div">
                 <img class="movie-img" src="${oneSearchedMovie.Poster}" alt="Poster image for movie ${oneSearchedMovie.Title}"/>
             </div>
             <div class="movie-text-div">
                 <div class="flex">
                     <h2>${oneSearchedMovie.Title}</h2>
-                    <h3><span><i class="fa-solid fa-star star"></i></span>${oneSearchedMovie.imdbRating}</h3>
+                    <h3 class="rading"><span><i class="fa-solid fa-star star"></i></span>${oneSearchedMovie.imdbRating}</h3>
                 </div>
                 <div class="flex movie-details">
                     <p>${oneSearchedMovie.Runtime}</p>

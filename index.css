@@ -55,6 +55,7 @@ main{
     position: relative;
     display: flex;
     justify-content: center;
+    padding-top: 0;
 }
 
 .search-bar{
@@ -98,12 +99,18 @@ h3{
 .movie-img{
     max-width: 25vw;
     height: auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
 }
 
 .movie-text-div{
-    margin-left: 2em;;
+    margin-left: 2em;
 }
 
+.rating{
+    display: flex;
+    flex-direction: row;
+}
 
 .star{
     color:#FECA5F;
@@ -146,4 +153,10 @@ h3{
 
 .movie-plot{
     color: #9095A0;
+}
+
+.one-searched-movie{
+    border-bottom: 1px solid #393333;
+    margin: 8px 0;
+    width: 100%;
 }
