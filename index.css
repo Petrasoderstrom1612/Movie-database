@@ -65,6 +65,61 @@ main{
     justify-content: center;
     height: 4vh;
     margin-bottom: 2em;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border: 1px solid #4a4a4a;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #dadde1;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 400px; /* Adjust width as needed */
+    background-color: #fff;
+    color: #677385;
+}
+
+.search-icon {
+    padding: 8px 10px;
+    color: #677385; /* Light grey color */
+    background-color: white;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 14px;
+    color: #4a4a4a;
+    flex: 2; /* Increased from 1 to 2 to make it take more space */
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 14px;
+    color: #4a4a4a;
+    min-width: 200px; 
+}
+
+.search-btn {
+    background: #f1f3f5;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #4a4a4a;
+    border-left: 1px solid #dadde1;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.search-btn:hover {
+    background: #e3e6e9;
 }
 
 /* MOVIES */
