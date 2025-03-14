@@ -1,3 +1,7 @@
+body{
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+}
 /* BANNER */
 .banner {
     position: relative;
@@ -63,16 +67,27 @@ main{
 }
 
 /* MOVIES */
+
+h2{
+    font-size: 1.2em;
+    padding-right: 0.9em;
+}
+
+h3{
+    font-size: smaller;
+    font-weight: 500;
+}
+
 .movies-section{
     margin-top: 2em;
 }
 
 .flex{
-    display: flex;    
+    display: flex;
+    align-items: center;    
 }
 
 .flex-center{
-    align-items: center;
     justify-content: space-around;
 }
 
@@ -89,6 +104,46 @@ main{
     margin-left: 2em;;
 }
 
-.genre{
-    text-align: center;
+
+.star{
+    color:#FECA5F;
+    font-size: 0.7em;
+    margin-right: 0.5em;
+}
+
+.movie-details{
+    gap: 1.3em;
+}
+
+.watchlist-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: transparent;
+    border: none;
+    color: #0f1419;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.watchlist-btn .plus-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #0f1419;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.watchlist-btn:hover .plus-icon {
+    background-color: #212529;
+}
+
+.movie-plot{
+    color: #9095A0;
 }
