@@ -10,7 +10,8 @@ const moviesResult = document.getElementById("movies-result")
 let searchedWord = "love"
 let searchedMoviesArrShort = []
 let searchedMoviesArrAllData = []
-export let watchlistMovies = []
+
+export let watchlistMovies = JSON.parse(localStorage.getItem("watchlistMovies")) || [] //you need to introduce local storage with or empty array to avoid errors, it wants to load a state so either declare empty array of the array with data
 
 
 const displayMovies = async () => {
@@ -24,6 +25,7 @@ const displayMovies = async () => {
     console.log("array of searched movies with little data",searchedMoviesArrShort)
 
     //use the extracted imbdID to create a new array with movies that include all data
+    searchedMoviesArrAllData = []; //clear the previous search first
     for (let i=0; i< searchedMoviesArrShort.length; i++){
         console.log(searchedMoviesArrShort[i])
 
@@ -68,6 +70,8 @@ document.addEventListener("click",(e) => { // LISTENERS ON ICON CLICKS VIA DATAS
         if(e.target.dataset.watchlistAddition === wishedMoviefromArrAllData.imdbID){
             console.log(wishedMoviefromArrAllData.imdbID)
             watchlistMovies.push(wishedMoviefromArrAllData)
+            localStorage.setItem("watchlistMovies", JSON.stringify(watchlistMovies));
+            console.log("Updated watchlist:", watchlistMovies);
             console.log(watchlistMovies)
         }
     }
@@ -76,3 +80,5 @@ document.addEventListener("click",(e) => { // LISTENERS ON ICON CLICKS VIA DATAS
 // local storage so that my watchlist stays across rerendering
 // debug if the id is already included in the wishedMoviefromArrAllData do not add it again
 // add real input instead of the hardcoded word love
+// add a function to remove a movie from wishlist
+// add a link from the wishlist as a default to go to home and add movies if list empty
