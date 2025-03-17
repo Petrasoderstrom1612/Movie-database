@@ -69,15 +69,16 @@ document.addEventListener("click",(e) => { // LISTENERS ON ICON CLICKS VIA DATAS
     for (let wishedMoviefromArrAllData of searchedMoviesArrAllData){
         if(e.target.dataset.watchlistAddition === wishedMoviefromArrAllData.imdbID){
             console.log(wishedMoviefromArrAllData.imdbID)
-            watchlistMovies.push(wishedMoviefromArrAllData)
-            localStorage.setItem("watchlistMovies", JSON.stringify(watchlistMovies));
-            console.log("Updated watchlist:", watchlistMovies);
-            console.log(watchlistMovies)
+            if(!watchlistMovies.includes(wishedMoviefromArrAllData)){
+                watchlistMovies.push(wishedMoviefromArrAllData)
+                localStorage.setItem("watchlistMovies", JSON.stringify(watchlistMovies));
+                console.log("Updated watchlist:", watchlistMovies);
+                console.log(watchlistMovies)
+            }
         }
     }
 })        
 
-// debug if the id is already included in the wishedMoviefromArrAllData do not add it again
 // local storage so that the searched movies stay on the screen when you go to watchlist page and back surviving rerendering
 // add a function to remove a movie from wishlist
 // add real input instead of the hardcoded word love
