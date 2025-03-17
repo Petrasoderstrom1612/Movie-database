@@ -9,33 +9,17 @@ const moviesResult = document.getElementById("movies-result")
 
 let searchedWord = "love"
 let searchedMoviesArrShort = []
-let searchedMoviesArrAllData = []
 
 let watchlistMovies = JSON.parse(localStorage.getItem("watchlistMovies")) || [] //you need to introduce local storage with or empty array to avoid errors, it wants to load a state so either declare empty array of the array with data
+let searchedMoviesArrAllData = JSON.parse(localStorage.getItem("searchedMoviesArrAllData")) || []
 
-
-const displayMovies = async () => {
-    //extract the imdbID from each movie as this api anrop include very little data about each movie
-    const res = await fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${searchedWord}`) 
-    const data = await res.json()
-    console.log(data)
-    let moviesArr = data.Search
-    searchedMoviesArrShort = moviesArr.map(oneMovie => oneMovie.imdbID);
-    moviesResult.innerHTML = searchedMoviesArrShort
-    console.log("array of searched movies with little data",searchedMoviesArrShort)
-
-    //use the extracted imbdID to create a new array with movies that include all data
-    searchedMoviesArrAllData = []; //clear the previous search first
-    for (let i=0; i< searchedMoviesArrShort.length; i++){
-        console.log(searchedMoviesArrShort[i])
-
-        const res = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&i=${searchedMoviesArrShort[i]}`);
-        const data = await res.json();
-            console.log("one movie full data", data)
-            searchedMoviesArrAllData.push(data) 
+document.addEventListener("DOMContentLoaded", () => {
+    if(searchedMoviesArrAllData.length > 0){
+        renderMovies(searchedMoviesArrAllData)
     }
-    console.log("final array with searched movies with all data", searchedMoviesArrAllData)
+})
 
+const renderMovies = (searchedMoviesArrAllData) =>{
     //create html with the new array with movies that include all data
     const searchedMoviesHTML = searchedMoviesArrAllData.map((oneSearchedMovie) =>{
         return `
@@ -60,8 +44,36 @@ const displayMovies = async () => {
         </div>
         `
     }) 
-  
+    
     moviesResult.innerHTML = searchedMoviesHTML.join("")       
+}
+
+const displayMovies = async () => {
+    //extract the imdbID from each movie as this api anrop include very little data about each movie
+    const res = await fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${searchedWord}`) 
+    const data = await res.json()
+    console.log(data)
+    let moviesArr = data.Search
+    searchedMoviesArrShort = moviesArr.map(oneMovie => oneMovie.imdbID);
+    moviesResult.innerHTML = searchedMoviesArrShort
+    console.log("array of searched movies with little data",searchedMoviesArrShort)
+
+    //use the extracted imbdID to create a new array with movies that include all data
+    searchedMoviesArrAllData = []; //clear the previous search first
+
+    for (let i=0; i< searchedMoviesArrShort.length; i++){
+        console.log(searchedMoviesArrShort[i])
+
+        const res = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&i=${searchedMoviesArrShort[i]}`);
+        const data = await res.json();
+            console.log("one movie full data", data)
+            searchedMoviesArrAllData.push(data) 
+    }
+
+    localStorage.setItem("searchedMoviesArrAllData",JSON.stringify(searchedMoviesArrAllData))
+    console.log("final array with searched movies with all data", searchedMoviesArrAllData)
+    renderMovies(searchedMoviesArrAllData)
+
 }
 searchBtn.addEventListener("click", displayMovies)
 
