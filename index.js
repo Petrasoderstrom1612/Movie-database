@@ -91,7 +91,7 @@ document.addEventListener("click",(e) => { // LISTENERS ON ICON CLICKS VIA DATAS
     }
 })        
 
-// local storage so that the searched movies stay on the screen when you go to watchlist page and back surviving rerendering
-// add a function to remove a movie from wishlist
+// place html into function to render a movie from wishlist .addEventListener("DOMContentLoaded" and add it also into the removal of a movie from wishlist
 // add real input instead of the hardcoded word love
 // add a link from the wishlist as a default to go to home and add movies if list empty
+// local storage so that the searched movies stay on the screen when you go to watchlist page and back surviving rerendering

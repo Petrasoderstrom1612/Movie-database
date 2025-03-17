@@ -19,7 +19,7 @@ const watchlistmoviesHTML = watchlistMovies.map((oneSearchedMovie) =>{
             <div class="flex movie-details">
                 <p>${oneSearchedMovie.Runtime}</p>
                 <p>${oneSearchedMovie.Genre}</p>
-                <button class="watchlist-btn" data-watchlist-addition="${oneSearchedMovie.imdbID}"><span class="plus-icon" data-watchlist-addition="${oneSearchedMovie.imdbID}">-</span>Watchlist</button>
+                <button class="watchlist-btn" data-watchlist-addition="${oneSearchedMovie.imdbID}"><span class="plus-icon" data-watchlist-removal="${oneSearchedMovie.imdbID}">-</span>Watchlist</button>
             </div>
             <div>
                 <p class="movie-plot">${oneSearchedMovie.Plot}</p>
@@ -30,3 +30,15 @@ const watchlistmoviesHTML = watchlistMovies.map((oneSearchedMovie) =>{
 }).join("") 
 
 wishedMoviesList.innerHTML = watchlistmoviesHTML
+
+document.addEventListener("click",(e) => { // LISTENERS ON ICON CLICKS VIA DATASET
+    for (let unwishedMoviefromArrAllData of watchlistMovies){
+        if(e.target.dataset.watchlistRemoval === unwishedMoviefromArrAllData.imdbID){
+            console.log(unwishedMoviefromArrAllData.imdbID)
+            watchlistMovies = watchlistMovies.filter((oneMovie) => oneMovie !== unwishedMoviefromArrAllData)
+                localStorage.setItem("watchlistMovies", JSON.stringify(watchlistMovies));
+                console.log("Updated watchlist:", watchlistMovies);
+                console.log(watchlistMovies)
+        }
+    }
+})   
