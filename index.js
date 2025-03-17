@@ -11,7 +11,7 @@ let searchedWord = "love"
 let searchedMoviesArrShort = []
 let searchedMoviesArrAllData = []
 
-export let watchlistMovies = JSON.parse(localStorage.getItem("watchlistMovies")) || [] //you need to introduce local storage with or empty array to avoid errors, it wants to load a state so either declare empty array of the array with data
+let watchlistMovies = JSON.parse(localStorage.getItem("watchlistMovies")) || [] //you need to introduce local storage with or empty array to avoid errors, it wants to load a state so either declare empty array of the array with data
 
 
 const displayMovies = async () => {

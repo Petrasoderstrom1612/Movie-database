@@ -1,6 +1,7 @@
-import { watchlistMovies } from './index.js';
+const wishedMoviesList = document.getElementById("wished-movies-list")
 
-// Now you can use watchlistMovies here
+
+let watchlistMovies = JSON.parse(localStorage.getItem("watchlistMovies")) || []
 console.log("watchlistMovies", watchlistMovies);
 
 
