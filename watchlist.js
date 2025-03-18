@@ -5,6 +5,13 @@ let watchlistMovies = JSON.parse(localStorage.getItem("watchlistMovies")) || []
 console.log("watchlistMovies", watchlistMovies);
 
 
+document.addEventListener("DOMContentLoaded", () => {
+    if (watchlistMovies.length > 0){
+        renderWishlist(watchlistMovies)
+    }
+})
+
+
 const renderWishlist = (watchlistMovies) => {
     
     const watchlistmoviesHTML = watchlistMovies.map((oneSearchedMovie) =>{
@@ -33,8 +40,6 @@ const renderWishlist = (watchlistMovies) => {
     
     wishedMoviesList.innerHTML = watchlistmoviesHTML    
 }
-
-renderWishlist(watchlistMovies)
 
 document.addEventListener("click",(e) => { // LISTENERS ON ICON CLICKS VIA DATASET
     for (let unwishedMoviefromArrAllData of watchlistMovies){

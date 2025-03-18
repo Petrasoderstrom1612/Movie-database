@@ -111,6 +111,6 @@ document.addEventListener("click",(e) => { // LISTENERS ON ICON CLICKS VIA DATAS
 })        
 
 
-//make the watchlist button grey  when you you already added movie on it
-// check the deletion function works properly
-// add a link from the wishlist as a default to go to home and add movies if list empty
+//make the watchlist button grey when you you already added movie on it and change the plus to minus and add the same function from watchlist
+// check the deletion function works properly in watchlist
+// add a link from the wishlist as a default to go to home and add movies if list is empty again
