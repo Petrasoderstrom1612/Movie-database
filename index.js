@@ -91,6 +91,6 @@ document.addEventListener("click",(e) => { // LISTENERS ON ICON CLICKS VIA DATAS
     }
 })        
 
-
+// fix .includes
 // add real input instead of the hardcoded word love
 // add a link from the wishlist as a default to go to home and add movies if list empty
