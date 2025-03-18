@@ -6,12 +6,27 @@
 import { API_KEY } from "./config.js";
 const searchBtn = document.getElementById("search-btn")
 const moviesResult = document.getElementById("movies-result")
+const searchInput = document.getElementById("search-input")
 
-let searchedWord = "love"
+let searchedWord
 let searchedMoviesArrShort = []
 
 let watchlistMovies = JSON.parse(localStorage.getItem("watchlistMovies")) || [] //you need to introduce local storage with or empty array to avoid errors, it wants to load a state so either declare empty array of the array with data
 let searchedMoviesArrAllData = JSON.parse(localStorage.getItem("searchedMoviesArrAllData")) || []
+
+searchBtn.addEventListener("click",() =>{
+    assignSearchWord()
+    if (searchInput.value){
+        if (searchedWord){
+        displayMovies()
+        searchInput.value = ""
+        }
+    }
+})
+
+const assignSearchWord = () => {
+    searchedWord = searchInput.value
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     if(searchedMoviesArrAllData.length > 0){
@@ -75,7 +90,7 @@ const displayMovies = async () => {
     renderMovies(searchedMoviesArrAllData)
 
 }
-searchBtn.addEventListener("click", displayMovies)
+
 
 document.addEventListener("click",(e) => { // LISTENERS ON ICON CLICKS VIA DATASET
     for (let wishedMoviefromArrAllData of searchedMoviesArrAllData){
@@ -86,9 +101,9 @@ document.addEventListener("click",(e) => { // LISTENERS ON ICON CLICKS VIA DATAS
                 localStorage.setItem("watchlistMovies", JSON.stringify(watchlistMovies));
                 console.log("Updated watchlist:", watchlistMovies);
                 console.log(watchlistMovies)
+                e.target.classList.add("grey-color")
             } else{
                 console.log(e.target)
-                e.target.classList.add("grey-color")
                 alert(`${wishedMoviefromArrAllData.Title} is already on your wishlist!`)
             }
         }
@@ -97,5 +112,5 @@ document.addEventListener("click",(e) => { // LISTENERS ON ICON CLICKS VIA DATAS
 
 
 //make the watchlist button grey  when you you already added movie on it
-// add real input instead of the hardcoded word love
+// check the deletion function works properly
 // add a link from the wishlist as a default to go to home and add movies if list empty
