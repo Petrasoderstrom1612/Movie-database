@@ -35,7 +35,7 @@ const renderMovies = (searchedMoviesArrAllData) =>{
                 <div class="flex movie-details">
                     <p>${oneSearchedMovie.Runtime}</p>
                     <p>${oneSearchedMovie.Genre}</p>
-                    <button class="watchlist-btn" data-watchlist-addition="${oneSearchedMovie.imdbID}"><span class="plus-icon" data-watchlist-addition="${oneSearchedMovie.imdbID}">+</span>Watchlist</button>
+                    <button class="watchlist-btn to-be-added" data-watchlist-addition="${oneSearchedMovie.imdbID}"><span class="plus-icon" data-watchlist-addition="${oneSearchedMovie.imdbID}">+</span>Watchlist</button>
                 </div>
                 <div>
                     <p class="movie-plot">${oneSearchedMovie.Plot}</p>
@@ -81,16 +81,21 @@ document.addEventListener("click",(e) => { // LISTENERS ON ICON CLICKS VIA DATAS
     for (let wishedMoviefromArrAllData of searchedMoviesArrAllData){
         if(e.target.dataset.watchlistAddition === wishedMoviefromArrAllData.imdbID){
             console.log(wishedMoviefromArrAllData.imdbID)
-            if(!watchlistMovies.includes(wishedMoviefromArrAllData)){
+            if(!watchlistMovies.some(oneMovie => oneMovie.imdbID === wishedMoviefromArrAllData.imdbID)){
                 watchlistMovies.unshift(wishedMoviefromArrAllData)
                 localStorage.setItem("watchlistMovies", JSON.stringify(watchlistMovies));
                 console.log("Updated watchlist:", watchlistMovies);
                 console.log(watchlistMovies)
+            } else{
+                console.log(e.target)
+                e.target.classList.add("grey-color")
+                alert(`${wishedMoviefromArrAllData.Title} is already on your wishlist!`)
             }
         }
     }
 })        
 
-// fix .includes
+
+//make the watchlist button grey  when you you already added movie on it
 // add real input instead of the hardcoded word love
 // add a link from the wishlist as a default to go to home and add movies if list empty

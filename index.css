@@ -241,6 +241,11 @@ h3{
     width: 100%;
 }
 
+.grey-color{
+    color: #9095A0;
+    
+}
+
 @media (max-width: 480px) {
     .movie-text-div {
         margin-left: 0;
