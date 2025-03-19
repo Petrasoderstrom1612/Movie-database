@@ -81,27 +81,33 @@ const displayMovies = async () => {
     const data = await res.json()
     console.log(data)
 
+    moviesResult.innerHTML = `<h2 class="searching-text">Searching for movies with word ${searchedWord}</h2>
+                              <div class="loader"></div>`
+    
     if (!data.Search){
         moviesResult.innerHTML = `<h2 class="searching-text">No movies with word ${searchedWord} found</h2>`
     }
 
     let moviesArr = data.Search
     searchedMoviesArrShort = moviesArr.map(oneMovie => oneMovie.imdbID);
-    moviesResult.innerHTML = `<h2 class="searching-text">Searching for movies with word ${searchedWord}</h2>
-                              <div class="loader"></div>`
+
     console.log("array of searched movies with little data",searchedMoviesArrShort)
 
+    const moviePromises = searchedMoviesArrShort.map(imdbID => fetch (`https://www.omdbapi.com/?apikey=${API_KEY}&i=${imdbID}`).then(res => res.json()))
+    searchedMoviesArrAllData = await Promise.all(moviePromises)
+
     //use the extracted imbdID to create a new array with movies that include all data
-    searchedMoviesArrAllData = []; //clear the previous search first
+    // searchedMoviesArrAllData = []; //clear the previous search first
 
-    for (let i=0; i< searchedMoviesArrShort.length; i++){
-        console.log(searchedMoviesArrShort[i])
+    // for (let i=0; i< searchedMoviesArrShort.length; i++){
+    //     console.log(searchedMoviesArrShort[i])
 
-        const res = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&i=${searchedMoviesArrShort[i]}`);
-        const data = await res.json();
-            console.log("one movie full data", data)
-            searchedMoviesArrAllData.push(data) 
-    }
+    //     const res = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&i=${searchedMoviesArrShort[i]}`);
+    //     const data = await res.json();
+    //         console.log("one movie full data", data)
+    //         searchedMoviesArrAllData.push(data) 
+    // }
+
 
     localStorage.setItem("searchedMoviesArrAllData",JSON.stringify(searchedMoviesArrAllData))
     console.log("final array with searched movies with all data", searchedMoviesArrAllData)
@@ -139,5 +145,4 @@ document.addEventListener("click", (e) => {
 });
 
 
-//change to await Promise.all(moviePromises)
 // add a link from the wishlist as a default to go to home and add movies if list is empty again
