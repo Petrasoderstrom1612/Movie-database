@@ -230,6 +230,19 @@ h3{
     font-weight: bold;
 }
 
+.watchlist-btn .minus-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #0f1419;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
 .watchlist-btn:hover .plus-icon {
     background-color: #212529;
 }
@@ -244,10 +257,6 @@ h3{
     width: 100%;
 }
 
-.grey-color{
-    color: #9095A0;
-    
-}
 
 @media (max-width: 480px) {
     .movie-text-div {

@@ -8,11 +8,17 @@ const searchBtn = document.getElementById("search-btn")
 const moviesResult = document.getElementById("movies-result")
 const searchInput = document.getElementById("search-input")
 
-let searchedWord
+let searchedWord = ""
 let searchedMoviesArrShort = []
 
 let watchlistMovies = JSON.parse(localStorage.getItem("watchlistMovies")) || [] //you need to introduce local storage with or empty array to avoid errors, it wants to load a state so either declare empty array of the array with data
 let searchedMoviesArrAllData = JSON.parse(localStorage.getItem("searchedMoviesArrAllData")) || []
+
+document.addEventListener("DOMContentLoaded", () => {
+    if (searchedMoviesArrAllData.length > 0){
+        renderMovies(searchedMoviesArrAllData,watchlistMovies)
+    }
+})
 
 searchBtn.addEventListener("click",() =>{
     assignSearchWord()
@@ -30,13 +36,18 @@ const assignSearchWord = () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     if(searchedMoviesArrAllData.length > 0){
-        renderMovies(searchedMoviesArrAllData)
+        renderMovies(searchedMoviesArrAllData, watchlistMovies)
     }
 })
 
-const renderMovies = (searchedMoviesArrAllData) =>{
+const renderMovies = (searchedMoviesArrAllData, watchlistMovies) =>{
     //create html with the new array with movies that include all data
     const searchedMoviesHTML = searchedMoviesArrAllData.map((oneSearchedMovie) =>{
+        let addToWishList = `<button class="watchlist-btn to-be-added" data-watchlist-addition="${oneSearchedMovie.imdbID}"><span class="plus-icon" data-watchlist-addition="${oneSearchedMovie.imdbID}">+</span>Watchlist</button>`
+        let removeFromWishList = `<button class="watchlist-btn to-be-added" data-watchlist-addition="${oneSearchedMovie.imdbID}"><span class="minus-icon" data-watchlist-addition="${oneSearchedMovie.imdbID}">-</span>Remove</button>`
+
+        let watchlistBtn = Array.isArray(watchlistMovies) && watchlistMovies.some(watchlistMovie => watchlistMovie.imdbID === oneSearchedMovie.imdbID) ?  removeFromWishList : addToWishList
+
         return `
         <div class="flex one-searched-movie">
             <div class="movie-img-div">
@@ -50,7 +61,7 @@ const renderMovies = (searchedMoviesArrAllData) =>{
                 <div class="flex movie-details">
                     <p>${oneSearchedMovie.Runtime}</p>
                     <p>${oneSearchedMovie.Genre}</p>
-                    <button class="watchlist-btn to-be-added" data-watchlist-addition="${oneSearchedMovie.imdbID}"><span class="plus-icon" data-watchlist-addition="${oneSearchedMovie.imdbID}">+</span>Watchlist</button>
+                    ${watchlistBtn}
                 </div>
                 <div>
                     <p class="movie-plot">${oneSearchedMovie.Plot}</p>
@@ -64,6 +75,7 @@ const renderMovies = (searchedMoviesArrAllData) =>{
 }
 
 const displayMovies = async () => {
+    try {
     //extract the imdbID from each movie as this api anrop include very little data about each movie
     const res = await fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${searchedWord}`) 
     const data = await res.json()
@@ -87,8 +99,10 @@ const displayMovies = async () => {
 
     localStorage.setItem("searchedMoviesArrAllData",JSON.stringify(searchedMoviesArrAllData))
     console.log("final array with searched movies with all data", searchedMoviesArrAllData)
-    renderMovies(searchedMoviesArrAllData)
-
+    renderMovies(searchedMoviesArrAllData, watchlistMovies)
+    } catch (error){
+        console.error("error fetching movies", error)
+    }
 }
 
 
@@ -100,17 +114,13 @@ document.addEventListener("click",(e) => { // LISTENERS ON ICON CLICKS VIA DATAS
                 watchlistMovies.unshift(wishedMoviefromArrAllData)
                 localStorage.setItem("watchlistMovies", JSON.stringify(watchlistMovies));
                 console.log("Updated watchlist:", watchlistMovies);
-                console.log(watchlistMovies)
-                e.target.classList.add("grey-color")
-            } else{
-                console.log(e.target)
-                alert(`${wishedMoviefromArrAllData.Title} is already on your wishlist!`)
-            }
+                // renderMovies(searchedMoviesArrAllData, watchlistMovies)
+            } 
         }
     }
 })        
 
-
-//make the watchlist button grey when you you already added movie on it and change the plus to minus and add the same function from watchlist
-// check the deletion function works properly in watchlist
+// make the minus button change to plus directly after clicking on it on homepage, not that you need to go to watchlist and back
+//change the numbers to looking for a movie that includes "bla bla"
+//change to await Promise.all(moviePromises)
 // add a link from the wishlist as a default to go to home and add movies if list is empty again

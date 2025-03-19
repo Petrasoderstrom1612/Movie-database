@@ -28,7 +28,7 @@ const renderWishlist = (watchlistMovies) => {
         <div class="flex movie-details">
         <p>${oneSearchedMovie.Runtime}</p>
         <p>${oneSearchedMovie.Genre}</p>
-        <button class="watchlist-btn" data-watchlist-addition="${oneSearchedMovie.imdbID}"><span class="plus-icon" data-watchlist-removal="${oneSearchedMovie.imdbID}">-</span>Watchlist</button>
+        <button class="watchlist-btn" data-watchlist-removal="${oneSearchedMovie.imdbID}"><span class="plus-icon" data-watchlist-removal="${oneSearchedMovie.imdbID}">-</span>Watchlist</button>
         </div>
         <div>
         <p class="movie-plot">${oneSearchedMovie.Plot}</p>
@@ -41,15 +41,14 @@ const renderWishlist = (watchlistMovies) => {
     wishedMoviesList.innerHTML = watchlistmoviesHTML    
 }
 
-document.addEventListener("click",(e) => { // LISTENERS ON ICON CLICKS VIA DATASET
-    for (let unwishedMoviefromArrAllData of watchlistMovies){
-        if(e.target.dataset.watchlistRemoval === unwishedMoviefromArrAllData.imdbID){ //remove movie
-            console.log(unwishedMoviefromArrAllData.imdbID)
-            watchlistMovies = watchlistMovies.filter((oneMovie) => oneMovie !== unwishedMoviefromArrAllData)
-                localStorage.setItem("watchlistMovies", JSON.stringify(watchlistMovies));
-                renderWishlist(watchlistMovies)
-                console.log("Updated watchlist:", watchlistMovies);
-                console.log(watchlistMovies)
-        }
+document.addEventListener("click", (e) => { 
+    if (e.target.dataset.watchlistRemoval) {  // Check if clicked element has dataset attribute
+        const movieToRemove = e.target.dataset.watchlistRemoval;
+
+        watchlistMovies = watchlistMovies.filter((oneMovie) => oneMovie.imdbID !== movieToRemove);
+
+        localStorage.setItem("watchlistMovies", JSON.stringify(watchlistMovies));
+        renderWishlist(watchlistMovies);
+        console.log("Updated watchlist:", watchlistMovies);
     }
-})   
+});
