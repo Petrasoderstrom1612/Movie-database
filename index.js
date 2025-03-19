@@ -82,7 +82,8 @@ const displayMovies = async () => {
     console.log(data)
     let moviesArr = data.Search
     searchedMoviesArrShort = moviesArr.map(oneMovie => oneMovie.imdbID);
-    moviesResult.innerHTML = searchedMoviesArrShort
+    moviesResult.innerHTML = `<h2 class="searching-text">Searching for movies with word ${searchedWord}</h2>
+                              <div class="loader"></div>`
     console.log("array of searched movies with little data",searchedMoviesArrShort)
 
     //use the extracted imbdID to create a new array with movies that include all data
@@ -132,7 +133,6 @@ document.addEventListener("click", (e) => {
     }
 });
 
-// make the minus button change to plus directly after clicking on it on homepage, not that you need to go to watchlist and back
-//change the numbers to looking for a movie that includes "bla bla"
+
 //change to await Promise.all(moviePromises)
 // add a link from the wishlist as a default to go to home and add movies if list is empty again
