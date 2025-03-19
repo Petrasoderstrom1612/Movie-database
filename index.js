@@ -80,6 +80,11 @@ const displayMovies = async () => {
     const res = await fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${searchedWord}`) 
     const data = await res.json()
     console.log(data)
+
+    if (!data.Search){
+        moviesResult.innerHTML = `<h2 class="searching-text">No movies with word ${searchedWord} found</h2>`
+    }
+
     let moviesArr = data.Search
     searchedMoviesArrShort = moviesArr.map(oneMovie => oneMovie.imdbID);
     moviesResult.innerHTML = `<h2 class="searching-text">Searching for movies with word ${searchedWord}</h2>
