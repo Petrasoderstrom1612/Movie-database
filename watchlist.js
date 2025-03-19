@@ -8,6 +8,9 @@ console.log("watchlistMovies", watchlistMovies);
 document.addEventListener("DOMContentLoaded", () => {
     if (watchlistMovies.length > 0){
         renderWishlist(watchlistMovies)
+    } else {
+        wishedMoviesList.innerHTML = `<div class="empty-selection-body"><i class="fa-solid fa-film movie-icon"></i><h2 class="start-exploring">The list is empty</h2>
+                                      <a class="start-exploring" href="./index.html"> Start exploring</a>`
     }
 })
 

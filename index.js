@@ -145,4 +145,3 @@ document.addEventListener("click", (e) => {
 });
 
 
-// add a link from the wishlist as a default to go to home and add movies if list is empty again
