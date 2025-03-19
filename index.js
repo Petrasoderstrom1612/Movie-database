@@ -44,7 +44,7 @@ const renderMovies = (searchedMoviesArrAllData, watchlistMovies) =>{
     //create html with the new array with movies that include all data
     const searchedMoviesHTML = searchedMoviesArrAllData.map((oneSearchedMovie) =>{
         let addToWishList = `<button class="watchlist-btn to-be-added" data-watchlist-addition="${oneSearchedMovie.imdbID}"><span class="plus-icon" data-watchlist-addition="${oneSearchedMovie.imdbID}">+</span>Watchlist</button>`
-        let removeFromWishList = `<button class="watchlist-btn to-be-added" data-watchlist-addition="${oneSearchedMovie.imdbID}"><span class="minus-icon" data-watchlist-addition="${oneSearchedMovie.imdbID}">-</span>Remove</button>`
+        let removeFromWishList = `<button class="watchlist-btn to-be-added" data-watchlist-removal="${oneSearchedMovie.imdbID}"><span class="minus-icon" data-watchlist-removal="${oneSearchedMovie.imdbID}">-</span>Remove</button>`
 
         let watchlistBtn = Array.isArray(watchlistMovies) && watchlistMovies.some(watchlistMovie => watchlistMovie.imdbID === oneSearchedMovie.imdbID) ?  removeFromWishList : addToWishList
 
@@ -114,11 +114,23 @@ document.addEventListener("click",(e) => { // LISTENERS ON ICON CLICKS VIA DATAS
                 watchlistMovies.unshift(wishedMoviefromArrAllData)
                 localStorage.setItem("watchlistMovies", JSON.stringify(watchlistMovies));
                 console.log("Updated watchlist:", watchlistMovies);
-                // renderMovies(searchedMoviesArrAllData, watchlistMovies)
+                renderMovies(searchedMoviesArrAllData, watchlistMovies)
             } 
         }
     }
 })        
+
+document.addEventListener("click", (e) => { 
+    if (e.target.dataset.watchlistRemoval) {  // Check if clicked element has dataset attribute
+        const movieToRemove = e.target.dataset.watchlistRemoval;
+
+        watchlistMovies = watchlistMovies.filter((oneMovie) => oneMovie.imdbID !== movieToRemove);
+
+        localStorage.setItem("watchlistMovies", JSON.stringify(watchlistMovies));
+        renderMovies(searchedMoviesArrAllData, watchlistMovies)
+        console.log("Updated watchlist:", watchlistMovies);
+    }
+});
 
 // make the minus button change to plus directly after clicking on it on homepage, not that you need to go to watchlist and back
 //change the numbers to looking for a movie that includes "bla bla"
