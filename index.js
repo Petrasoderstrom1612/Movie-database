@@ -118,7 +118,7 @@ const displayMovies = async () => {
 }
 
 
-document.addEventListener("click",(e) => { // LISTENERS ON ICON CLICKS VIA DATASET
+document.addEventListener("click",(e) => { // LISTENERS ON ICON CLICKS VIA DATASET ...Add wished movie
     for (let wishedMoviefromArrAllData of searchedMoviesArrAllData){
         if(e.target.dataset.watchlistAddition === wishedMoviefromArrAllData.imdbID){
             console.log(wishedMoviefromArrAllData.imdbID)
@@ -133,7 +133,7 @@ document.addEventListener("click",(e) => { // LISTENERS ON ICON CLICKS VIA DATAS
 })        
 
 document.addEventListener("click", (e) => { 
-    if (e.target.dataset.watchlistRemoval) {  // Check if clicked element has dataset attribute
+    if (e.target.dataset.watchlistRemoval) {  // Check if clicked element has dataset attribute  ...Remove wished movie
         const movieToRemove = e.target.dataset.watchlistRemoval;
 
         watchlistMovies = watchlistMovies.filter((oneMovie) => oneMovie.imdbID !== movieToRemove);
