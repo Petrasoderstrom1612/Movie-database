@@ -89,11 +89,11 @@ const displayMovies = async () => {
     }
 
     let moviesArr = data.Search
-    searchedMoviesArrShort = moviesArr.map(oneMovie => oneMovie.imdbID);
+    searchedMoviesArrShort = moviesArr.map(oneMovie => oneMovie.imdbID); //to extract id from each movie. This api anrop only generates basic information
 
     console.log("array of searched movies with little data",searchedMoviesArrShort)
 
-    const moviePromises = searchedMoviesArrShort.map(imdbID => fetch (`https://www.omdbapi.com/?apikey=${API_KEY}&i=${imdbID}`).then(res => res.json()))
+    const moviePromises = searchedMoviesArrShort.map(imdbID => fetch (`https://www.omdbapi.com/?apikey=${API_KEY}&i=${imdbID}`).then(res => res.json())) //I am using the extracted ids from the short api anrop to get more detailed information about each movie that I got
     searchedMoviesArrAllData = await Promise.all(moviePromises)
 
     //use the extracted imbdID to create a new array with movies that include all data
